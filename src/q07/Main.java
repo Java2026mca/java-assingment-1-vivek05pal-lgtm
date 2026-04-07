@@ -15,24 +15,23 @@ public class Main {
 
         int swaps = 0;
 
-        // Bubble Sort (correct for grader)
+        // Selection Sort
         for (int i = 0; i < n - 1; i++) {
-            boolean swapped = false;
+            int minIndex = i;
 
-            for (int j = 0; j < n - i - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    // swap
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-
-                    swaps++;
-                    swapped = true;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
                 }
             }
 
-            // Optimization: stop if already sorted
-            if (!swapped) break;
+            // swap only if needed
+            if (minIndex != i) {
+                int temp = arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+                swaps++;
+            }
         }
 
         // Output
