@@ -5,21 +5,16 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
+        if (n <= 0) return;
 
-            
-                if (i == 1 || i == n || j == 1 || j == n) {
-                    System.out.print("*");
-                } else {
-                    System.out.print(" ");
-                }
+        int a = 0, b = 1;
 
-                
-                if (j < n) System.out.print(" ");
-            }
-            System.out.println();
+        for (int i = 0; i < n; i++) {
+            System.out.print(a);
+            if (i < n - 1) System.out.print(" ");
+            int next = a + b;
+            a = b;
+            b = next;
         }
     }
 }
-
