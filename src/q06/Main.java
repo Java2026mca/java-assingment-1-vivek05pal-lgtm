@@ -5,11 +5,21 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        // TODO: Print first n Fibonacci numbers separated by spaces
-        //       F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2)
-        //
-        // Input: 8
-        // Output: 0 1 1 2 3 5 8 13
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
 
+                // Border condition
+                if (i == 1 || i == n || j == 1 || j == n) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+
+                // Avoid trailing space
+                if (j < n) System.out.print(" ");
+            }
+            System.out.println();
+        }
     }
 }
+
