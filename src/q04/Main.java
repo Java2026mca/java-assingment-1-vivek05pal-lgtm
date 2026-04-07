@@ -5,21 +5,46 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        // TODO: Read n integers. For each number print:
-        //   "Prime"     if it is prime
-        //   "Perfect"   if it is a perfect number (sum of proper divisors == itself, e.g. 6=1+2+3)
-        //   "Both"      if it is both (there are none < 100, but handle it)
-        //   "Neither"   otherwise
-        //
-        // Input:
-        // 4
-        // 6 13 8 28
-        //
-        // Output:
-        // Perfect
-        // Prime
-        // Neither
-        // Perfect
+        
+        for (int i = 1; i <= n; i++) {
+            // leading spaces
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
 
+            
+            if (i == 1) {
+                System.out.print("*");
+            } else {
+                System.out.print("*");
+                for (int j = 1; j <= 2 * i - 3; j++) {
+                    System.out.print(" ");
+                }
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+
+        
+        for (int i = n - 1; i >= 1; i--) {
+            // leading spaces
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+
+            
+            if (i == 1) {
+                System.out.print("*");
+            } else {
+                System.out.print("*");
+                for (int j = 1; j <= 2 * i - 3; j++) {
+                    System.out.print(" ");
+                }
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
     }
 }
