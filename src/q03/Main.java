@@ -1,41 +1,63 @@
-import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
 
-        int[][] a = new int[n][n];
-        int top = 0, bottom = n - 1, left = 0, right = n - 1;
-        int val = 1;
+        int[][] mat = new int[n][n];
 
+        int top = 0, bottom = n - 1;
+        int left = 0, right = n - 1;
+        int num = 1;
+
+        // Fill spiral
         while (top <= bottom && left <= right) {
-            for (int i = left; i <= right; i++) a[top][i] = val++;
+
+            // left → right
+            for (int i = left; i <= right; i++) {
+                mat[top][i] = num++;
+            }
             top++;
 
-            for (int i = top; i <= bottom; i++) a[i][right] = val++;
+            // top → bottom
+            for (int i = top; i <= bottom; i++) {
+                mat[i][right] = num++;
+            }
             right--;
 
+            // right → left
             if (top <= bottom) {
-                for (int i = right; i >= left; i--) a[bottom][i] = val++;
+                for (int i = right; i >= left; i--) {
+                    mat[bottom][i] = num++;
+                }
                 bottom--;
             }
 
+            // bottom → top
             if (left <= right) {
-                for (int i = bottom; i >= top; i--) a[i][left] = val++;
+                for (int i = bottom; i >= top; i--) {
+                    mat[i][left] = num++;
+                }
                 left++;
             }
         }
 
-        int diag = 0;
+        // Build output
+        StringBuilder sb = new StringBuilder();
+        int diagSum = 0;
+
         for (int i = 0; i < n; i++) {
-            diag += a[i][i];
             for (int j = 0; j < n; j++) {
-                System.out.print(a[i][j] + (j < n - 1 ? " " : ""));
+                sb.append(mat[i][j]);
+                if (j < n - 1) sb.append(" ");
             }
-            System.out.println();
+            sb.append("\n");
+            diagSum += mat[i][i]; // main diagonal
         }
 
-        System.out.println("Diagonal: " + diag);
+        sb.append("Diagonal: ").append(diagSum);
+
+        System.out.print(sb.toString());
     }
 }
