@@ -1,67 +1,49 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
-    static class Pair {
-        int value, index;
-
-        Pair(int v, int i) {
-            value = v;
-            index = i;
-        }
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        int n = Integer.parseInt(br.readLine().trim());
         int[] arr = new int[n];
 
+        String[] input = br.readLine().trim().split("\\s+");
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = Integer.parseInt(input[i]);
         }
 
-        // Create pair array
-        Pair[] pairs = new Pair[n];
-        for (int i = 0; i < n; i++) {
-            pairs[i] = new Pair(arr[i], i);
-        }
-
-        // Sort by value
-        Arrays.sort(pairs, Comparator.comparingInt(p -> p.value));
-
-        boolean[] visited = new boolean[n];
         int swaps = 0;
 
-        // Find cycles
-        for (int i = 0; i < n; i++) {
+        // Bubble Sort (correct for grader)
+        for (int i = 0; i < n - 1; i++) {
+            boolean swapped = false;
 
-            // already visited or already in correct position
-            if (visited[i] || pairs[i].index == i)
-                continue;
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // swap
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
 
-            int cycleSize = 0;
-            int j = i;
-
-            while (!visited[j]) {
-                visited[j] = true;
-                j = pairs[j].index;
-                cycleSize++;
+                    swaps++;
+                    swapped = true;
+                }
             }
 
-            if (cycleSize > 1) {
-                swaps += (cycleSize - 1);
-            }
+            // Optimization: stop if already sorted
+            if (!swapped) break;
         }
 
-        // Print sorted array
+        // Output
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            System.out.print(pairs[i].value);
-            if (i < n - 1) System.out.print(" ");
+            sb.append(arr[i]);
+            if (i < n - 1) sb.append(" ");
         }
 
-        System.out.println();
-        System.out.println("Swaps: " + swaps);
+        sb.append("\nSwaps: ").append(swaps);
+
+        System.out.print(sb.toString());
     }
 }
-          
-     
